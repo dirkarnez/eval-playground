@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <script>
+        (() => {
+            eval("var a = 10");
+            alert(a); // a is 10. Works
+        })();
+        // a is not defined
+        //alert(a);
+
+        (() => {
+            var b = 0;
+            eval("b = 12");
+            alert(b); // b is now 12. Works
+        })();
+        // b is not defined
+        //alert(b);
+
+        (() => {
+            var myfunc = () => {
+                console.log("myfunc default")
+            };
+            myfunc();
+            eval("var myfunc = () => console.log(\"myfunc eval\")");
+            myfunc();
+        })();
+        // myfunc is not defined
+        //alert(myfunc);
+
+        (() => {
+            var myfunc2 = () => {
+                console.log("myfunc2 default")
+            };
+            myfunc2();
+            myfunc2 = eval("() => console.log(\"myfunc2 eval\")");
+            myfunc2();
+        })();
+        // myfunc3 is not defined
+        //alert(myfunc3);
+        
+        (() => {
+            var myfunc3 = () => {
+                console.log("myfunc3 default")
+            };
+            myfunc3();
+            myfunc3 = eval("(() => () => console.log(\"myfunc3 eval\"))()");
+            myfunc3();
+        })();
+        // myfunc3 is not defined
+        //alert(myfunc3);
+    </script>
+</body>
+
+</html>
